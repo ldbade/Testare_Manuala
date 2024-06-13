@@ -120,6 +120,19 @@ ALTER TABLE Treatment CHANGE MedcineDose MedicineDose varchar (20) NOT NULL;
 ALTER TABLE InPatients RENAME OutPatients;
 ALTER TABLE OutPatients RENAME COLUMN InPatientID TO OutPatientID;
 
+CREATE TABLE InPatients (
+OutPatientID int (1) NOT NULL AUTO_INCREMENT,
+PacHospID varchar(4) NOT NULL,
+PacLastName varchar (255) NOT NULL,
+PacFirstName varchar (255) NOT NULL,
+CNP varchar (13) NOT NULL,
+City varchar (100) NOT NULL,
+Address varchar (100) NULL,
+PacType varchar (100) NOT NULL,
+PacPhone int NOT NULL,
+FamilyNo int NOT NULL,
+PRIMARY KEY (OutPatientID)
+);
  
   
   <li>DML (Data Manipulation Language)</li>
@@ -202,32 +215,31 @@ INSERT INTO Farmacy VALUES ('RPR264', 'RESP147', 'Claritromicina', 'Ser fiziolog
 
 
 
+-
+INSERT INTO OutPatients VALUES (358, 2451, 'Cristorean', 'Maria', '2500504124656', 'Cluj Napoca', 'Campului 72', 'respirator', '0745235562', '0755454545');
+INSERT INTO OutPatients VALUES (359, 2452, 'Pop', 'Voicu', '1641212125124', 'Dej', 'Ciresilor 10', 'respirator', '0771343264', '0755455210');
+INSERT INTO OutPatients VALUES (360, 2453, 'Brad',  'Adrian', '1790823120554', 'Cluj Napoca', 'Tineretului 19', 'respirator', '0757000241', '0745414545');
 
 
+INSERT INTO OutPatients (OutPatientID, PacHospID, PacLastName, PacFirstName, CNP, City, Address, PacType, PacPhone, FamilyNo)
+ VALUES (361, 2454, 'Brad', 'Adriana', '2790823120554', 'Cluj Napoca', 'Tineretului 19', 'respirator', '0755702241', '0745484545');
 
 
-  **Inserati aici toate instructiunile de INSERT pe care le-ati scris. Incercati sa folositi atat insert pe toate coloanele (fara sa precizati pe ce coloane se face insert) cat si insert pe cateva coloane (care necesita mentionarea explicita a coloanelor pe care se face insert). De asemenea, incercati sa acoperiti situatia in care inserati mai multe randuri in acelasi timp**
-
+ 
   After the insert, in order to prepare the data to be better suited for the testing process, I updated some data in the following way:
 
-  **Inserati aici toate instructiunile de UPDATE pe care le-ati scris folosind filtrarile necesare astfel incat sa actualizati doar datele de care aveti nevoie**
-
+ 
+UPDATE Laboratory SET TestResults ='negative' WHERE LabTestID='Lab304';
+UPDATE Laboratory SET TestResults ='positive' WHERE LabTestID='Lab304';
 
   <li>DQL (Data Query Language)</li>
 
 After the testing process, I deleted the data that was no longer relevant in order to preserve the database clean: 
 
-**Inserati aici toate instructiunile de DELETE pe care le-ati scris folosind filtrarile necesare astfel incat sa stergeti doar datele de care aveti nevoie**
 
+DELETE FROM OutPatients WHERE City='Cluj-Napoca';
 In order to simulate various scenarios that might happen in real life I created the following queries that would cover multiple potential real-life situations:
-
-**Inserati aici toate instructiunile de SELECT pe care le-ati scris folosind filtrarile necesare astfel incat sa extrageti doar datele de care aveti nevoie**
-**Incercati sa acoperiti urmatoarele:**<br>
-
-
-
-
-
+<br>
 
 SELECT * FROM InPatients;
 SELECT * FROM PatientFile;
@@ -269,9 +281,10 @@ SELECT CONCAT(City, Address) AS FullAddress FROM PatientData;
 SELECT CONCAT_WS('*', PacLastName, PacFirstName) AS FullName FROM PatientData;
 
 SELECT LEFT ('Tomescu', 4) AS String;
+SELECT Dateofadmission, Diagnostic FROM Hospitalization WHERE Dateofadmission='2022-09-17' AND Diagnostic='Bronsita acuta';
+SELECT Dateofadmission, Diagnostic FROM Hospitalization WHERE Dateofadmission='2022-09-17' OR Diagnostic='Pneumonie bazala';
+SELECT * FROM PatientData WHERE City LIKE 'Nap%';
 
-**- where**<br>
-**- AND**<br>
 **- OR**<br>
 **- NOT**<br>
 **- like**<br>
