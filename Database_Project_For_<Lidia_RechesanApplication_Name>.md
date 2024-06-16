@@ -253,6 +253,10 @@ INNER JOIN Treatment ON PatientData.PacFileID=Treatment.PacFileID;
 SELECT * FROM PatientData
 CROSS JOIN Laboratory ON PatientData.PacFileID=Laboratory.PacFileID;
 
+SELECT Hospitalization.PacFileID, Treatment.TreatID FROM Hospitalization LEFT JOIN Treatment ON Hospitalization.TreatID=Treatment.TreatID;
+--The statement returns all records from Hospitalization and the matches records from Treatment;
+
+
 SELECT EmpCNP  AS CNP FROM Employees 
 UNION ALL
 SELECT CNP FROM PatientData
@@ -285,22 +289,18 @@ SELECT Dateofadmission, Diagnostic FROM Hospitalization WHERE Dateofadmission='2
 SELECT Dateofadmission, Diagnostic FROM Hospitalization WHERE Dateofadmission='2022-09-17' OR Diagnostic='Pneumonie bazala';
 SELECT * FROM PatientData WHERE City LIKE 'Nap%';
 
-**- OR**<br>
-**- NOT**<br>
-**- like**<br>
-**- inner join**<br>
-**- left join**<br>
-**- OPTIONAL: right join**<br>
-**- OPTIONAL: cross join**<br>
-**- functii agregate**<br>
-**- group by**<br>
-**- having**<br>
-**- OPTIONAL DAR RECOMANDAT: Subqueries - nu au fost in scopul cursului. Puteti sa consultati tutorialul [asta](https://www.techonthenet.com/mysql/subqueries.php) si daca nu intelegeti ceva contactati fie trainerul, fie coordonatorul de grupa**<br>
+SELECT EmpCNP SUM(Salary)
+FROM Employees
+GROUP BY EmpCNP
+HAVING SUM(Salary)>4000;
+
+
+
 
 </ol>
 
 <li>Conclusions</li>
 
-**Inserati aici o concluzie cu privire la ceea ce ati lucrat, gen lucrurile pe care le-ati invatat, lessons learned, un rezumat asupra a ceea ce ati facut si orice alta informatie care vi se pare relevanta pentru o concluzie finala asupra a ceea ce ati lucrat**
+An useful database for the respiratory department in a hospital has been created. The admin user gave the access to all staff needed. All the records should be updated daily for the patients' files, treatment, blood tests and other investigations, medication.
 
 </ol>
