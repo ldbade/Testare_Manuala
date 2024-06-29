@@ -57,6 +57,7 @@ Salary float NULL
 );
 ```
 
+```
 CREATE TABLE Hospitalization(
 PacFileID varchar (10) NOT NULL,
 PacHospID varchar (10) NOT NULL,
@@ -70,7 +71,8 @@ LabTestID varchar (10) NOT NULL,
 FarmID varchar (10) NOT NULL,
 PRIMARY KEY (PacFileID)
 );
-
+```
+```
 CREATE TABLE PatientData (
 PacHospID varchar(10) NOT NULL,
 PacFileID varchar (10) NOT NULL,
@@ -83,7 +85,8 @@ PacType varchar (100) NOT NULL,
 PacPhone int NOT NULL,
 FamilyNo int NOT NULL
 );
-
+```
+```
 CREATE TABLE Treatment (
 TreatID varchar(10) NOT NULL,
 PacHospID varchar(10) NOT NULL,
@@ -92,7 +95,8 @@ MedcineDose varchar (20) NOT NULL,
 MedicineTime varchar (20) NOT NULL,
 MedicineWay varchar (25) NOT NULL
 );
-
+```
+```
 CREATE TABLE Farmacy (
 FarmID varchar (10) NOT NULL,
 PacFileID varchar (10) NOT NULL,
@@ -104,7 +108,9 @@ MedName5 varchar (100) NULL,
 MedName6 varchar (100) NULL,
 TreatID varchar(10) NOT NULL
 );
+```
 
+```
 CREATE TABLE Laboratory (
 LabTestID varchar(10) NOT NULL,
 PacFileID varchar(10) NOT NULL,
@@ -112,7 +118,7 @@ TestName varchar(255) NOT NULL,
 TestDate date NOT NULL,
 TestResults varchar(255) NULL
 );
-
+```
   After the database and the tables have been created, a few ALTER instructions were written in order to update the structure of the database, as described below:
 ALTER TABLE RespDepartment MODIFY COLUMN PacFileID varchar (10) NOT NULL;
 ALTER TABLE Employees ADD PRIMARY KEY (EmpID);
@@ -123,6 +129,7 @@ ALTER TABLE Treatment CHANGE MedcineDose MedicineDose varchar (20) NOT NULL;
 ALTER TABLE InPatients RENAME OutPatients;
 ALTER TABLE OutPatients RENAME COLUMN InPatientID TO OutPatientID;
 
+```
 CREATE TABLE InPatients (
 OutPatientID int (1) NOT NULL AUTO_INCREMENT,
 PacHospID varchar(4) NOT NULL,
@@ -136,6 +143,7 @@ PacPhone int NOT NULL,
 FamilyNo int NOT NULL,
 PRIMARY KEY (OutPatientID)
 );
+```
  
   
   <h3>DML (Data Manipulation Language)</h3>
@@ -157,7 +165,7 @@ INSERT INTO RespDepartment VALUES (8, 'RESPIRATORY', 'RESP145', 28);
 INSERT INTO RespDepartment VALUES (9, 'RESPIRATORY', 'RESP146', 29);
 INSERT INTO RespDepartment VALUES (10, 'RESPIRATORY', 'RESP147', 30);
 ```
-
+```
 INSERT INTO Employees VALUES (21, 'Popescu', 'Adrian', '1700218120754', 'doctor', 1, 20000);         
 INSERT INTO Employees VALUES (22, 'Tomescu', 'Vasile', '1780615125740','doctor', 2, 1800);     
 INSERT INTO Employees VALUES (23, 'Sabau', 'Mihaela', '2751002333120','doctor', 3, 18500);       
@@ -170,8 +178,8 @@ INSERT INTO Employees VALUES (29, 'Pop', 'Dumitru', '1720606125235', 'manager', 
 INSERT INTO Employees VALUES (30, 'Prodan', 'Vasile', '1701205120554', 'portar', 10, 2730);          
 INSERT INTO Employees VALUES (31, 'Dumitrache', 'Camelia', '2791105120756', 'administrator', 11, 2655);     
 INSERT INTO Employees VALUES (32, 'Tomescu', 'Simona', '2681113125442', 'contabil', 12, 2900);    
-
-
+```
+```
 INSERT INTO Hospitalization VALUES ('RESP138', 'SPR2100', 1, '17A', 'Traheo-bronsita acuta', 'TR1', '2022-09-15 10:30:05', '2022-09-19 13:40:00', 'LAB301', 'RPR255');
 INSERT INTO Hospitalization VALUES ('RESP139', 'SPR2101', 2, '17A', 'Pneumonie acuta', 'TR2', '2022-09-15 11:00:00', '2022-09-20 14:10:09', 'LAB302', 'RPR256');
 INSERT INTO Hospitalization VALUES ('RESP140', 'SPR2102', 3, '17B', 'Angina acuta', 'TR3', '2022-09-15 20:05:05', '2022-09-20 11:10:05', 'LAB303', 'RPR257');
@@ -182,7 +190,8 @@ INSERT INTO Hospitalization  VALUES ('RESP144', 'SPR2106', 7, '19B', 'Pneumonie 
 INSERT INTO Hospitalization VALUES ('RESP145', 'SPR2107', 8, '20A', 'Angina acuta', 'TR8', '2022-09-18 09:00:05', '2022-09-21 13:14:00', 'LAB308','RPR262');
 INSERT INTO Hospitalization VALUES ('RESP146', 'SPR2108', 9, '20B', 'Pneumonie bazala dr', 'TR9', '2022-09-18 10:25:00', '2022-09-23 14:50:00', 'LAB309', 'RPR263');
 INSERT INTO Hospitalization VALUES ('RESP147', 'SPR2109', 10, '20B', 'Pneumonie bazala stg', 'TR10', '2022-09-19 10:25:00', '2022-09-23 14:50:00', 'LAB310', 'RPR264');
-
+```
+```
 INSERT INTO Treatment VALUES ('TR1','RESP138' , 'Augmentin', '1,2g', '08:00, 20:00', 'intravenos');
 INSERT INTO Treatment VALUES ('TR2', 'RESP139', 'Claritromicina', '500mg', '08:00, 20:00', 'perfuzabil');
 INSERT INTO Treatment VALUES ('TR3', 'RESP140', 'Augmentin', '1,2g', '08:00, 20:00', 'intravenos');
@@ -193,8 +202,9 @@ INSERT INTO Treatment VALUES ('TR7', 'RESP144', 'Claritromicina', '500mg', '08:0
 INSERT INTO Treatment VALUES ('TR8', 'RESP145' , 'Augmentin', '1,2g', '08:00, 20:00', 'intravenos');
 INSERT INTO Treatment VALUES ('TR9', 'RESP146', 'Claritromicina', '500mg', '08:00, 20:00', 'perfuzabil');
 INSERT INTO Treatment VALUES ('TR10','RESP147' , 'Claritromicina', '500mg', '08:00, 20:00', 'perfuzabil');
+```
 
-
+```
 INSERT INTO Laboratory VALUES ('LAB301', 'RESP138', 'ASLO', '2022-09-15', NULL);
 INSERT INTO Laboratory VALUES ('LAB302', 'RESP139', 'ExFaringian', '2022-09-15', NULL);
 INSERT INTO Laboratory VALUES ('LAB303', 'RESP140' , 'CRP', '2022-09-16', NULL);
@@ -205,8 +215,8 @@ INSERT INTO Laboratory VALUES ('LAB307', 'RESP144', 'ExFaringian', '2022-09-17',
 INSERT INTO Laboratory VALUES ('LAB308', 'RESP145', 'ASLO', '2022-09-18', NULL);
 INSERT INTO Laboratory VALUES ('LAB309', 'RESP146', 'Radiografie pulmonara', '2022-09-18', NULL);
 INSERT INTO Laboratory VALUES ('LAB310', 'RESP147', 'Radiografie pulmonara', '2022-09-19', NULL);
-
-
+```
+```
 INSERT INTO Farmacy VALUES ('RPR255', 'RESP138', 'Augmentin', 'Ser fiziologic', 'Paracetamol', NULL, NULL, NULL, 'TR1');
 INSERT INTO Farmacy VALUES ('RPR256', 'RESP139', 'Claritromicina', 'Ser fiziologic', 'Paracetamol', NULL, NULL, NULL, 'TR2');
 INSERT INTO Farmacy VALUES ('RPR257', 'RESP140', 'Augmentin', 'Ser fiziologic', 'Paracetamol', NULL, NULL, NULL, 'TR3');
@@ -217,18 +227,18 @@ INSERT INTO Farmacy VALUES ('RPR261', 'RESP144', 'Claritromicina', 'Ser fiziolog
 INSERT INTO Farmacy VALUES ('RPR262', 'RESP145', 'Augmentin', 'Ser fiziologic', 'Paracetamol', NULL, NULL, NULL, 'TR8');
 INSERT INTO Farmacy VALUES ('RPR263', 'RESP146', 'Claritromicina', 'Ser fiziologic', 'Paracetamol', NULL, NULL, NULL, 'TR9');
 INSERT INTO Farmacy VALUES ('RPR264', 'RESP147', 'Claritromicina', 'Ser fiziologic', 'Paracetamol', NULL, NULL, NULL, 'TR10');
+```
 
 
-
--
+```
 INSERT INTO OutPatients VALUES (358, 2451, 'Cristorean', 'Maria', '2500504124656', 'Cluj Napoca', 'Campului 72', 'respirator', '0745235562', '0755454545');
 INSERT INTO OutPatients VALUES (359, 2452, 'Pop', 'Voicu', '1641212125124', 'Dej', 'Ciresilor 10', 'respirator', '0771343264', '0755455210');
 INSERT INTO OutPatients VALUES (360, 2453, 'Brad',  'Adrian', '1790823120554', 'Cluj Napoca', 'Tineretului 19', 'respirator', '0757000241', '0745414545');
-
-
+```
+```
 INSERT INTO OutPatients (OutPatientID, PacHospID, PacLastName, PacFirstName, CNP, City, Address, PacType, PacPhone, FamilyNo)
  VALUES (361, 2454, 'Brad', 'Adriana', '2790823120554', 'Cluj Napoca', 'Tineretului 19', 'respirator', '0755702241', '0745484545');
-
+```
 
  
   After the insert, in order to prepare the data to be better suited for the testing process, I updated some data in the following way:
