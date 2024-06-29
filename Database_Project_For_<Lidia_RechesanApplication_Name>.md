@@ -2,15 +2,15 @@
 
 The scope of this project is to use all the SQL knowledge gained throught the Software Testing course and apply them in practice.
 
-Application under test: **HospitalDepartment**
+**Application under test**: HospitalDepartment
 
-Tools used: MySQL Workbench
+**Tools used**: MySQL Workbench
 
-Database description: ** A continuous updated databases in a hospital make the work much easier for all staff.**
+**Database description**: A continuous updated databases in a hospital make the work much easier for all staff.
 
-<ol>
-<li>Database Schema </li>
-<br>
+
+<h2>Database Schema</h2>
+
 You can find below the database schema that was generated through Reverse Engineer and which contains all the tables and the relationships between them.
 
 ![DiagramSQL](https://github.com/ldbade/Testare_Manuala/assets/161169534/90fa17b0-295e-4b60-807c-c92c294e81a7)
@@ -19,22 +19,22 @@ You can find below the database schema that was generated through Reverse Engine
   
 The tables are connected in the following way:
 
-<ul>
-  <li> **RespDepartment**  is connected with **Employees** through a **one to one** relationship which was implemented through **RespDepartment.DepID** as a primary key and **Employees. DepID** as a foreign key</li>
-  <li> **Hospitalization**  is connected with **RespDepartment** through a **one to many** relationship which was implemented through **Hospitalization.PacFileID** as a primary key and **RespDepartment.PacFileID** as a foreign key</li>
-  <li> **PatientData**  is connected with **Hospitalization** through a **one to many** relationship which was implemented through **PatientData.PacHospID** as a primary key and **Hospitalizatio.PacHospID** as a foreign key</li>
+
+  - **RespDepartment**  is connected with **Employees** through a **one to one** relationship which was implemented through **RespDepartment.DepID** as a primary key and **Employees. DepID** as a foreign key
+  - **Hospitalization**  is connected with **RespDepartment** through a **one to many** relationship which was implemented through **Hospitalization.PacFileID** as a primary key and **RespDepartment.PacFileID** as a foreign key
+  - **PatientData**  is connected with **Hospitalization** through a **one to many** relationship which was implemented through **PatientData.PacHospID** as a primary key and **Hospitalizatio.PacHospID** as a foreign key
  
-  <li> **Treatment**  is connected with **Hospitalization.TreatID** through a **one to many** relationship which was implemented through **Treatment.TreatID** as a primary key and **Hospitalization.TreatID** as a foreign key</li>
-   <li> **Farmacy**  is connected with **Treatment.TreatID** through a **one to many** relationship which was implemented through **Farmacy.FarmID** as a primary key and **Treatment.FarmID** as a foreign key</li>
-    <li> **Laboratory**  is connected with **Hospitalization.LabTestID** through a **one to many** relationship which was implemented through **Laboratory.LabTestID** as a primary key and **Hospitalization.LabTestID** as a foreign key</li>
-</ul><br>
+  - **Treatment**  is connected with **Hospitalization.TreatID** through a **one to many** relationship which was implemented through **Treatment.TreatID** as a primary key and **Hospitalization.TreatID** as a foreign key
+  - **Farmacy**  is connected with **Treatment.TreatID** through a **one to many** relationship which was implemented through **Farmacy.FarmID** as a primary key and **Treatment.FarmID** as a foreign key
+  - **Laboratory**  is connected with **Hospitalization.LabTestID** through a **one to many** relationship which was implemented through **Laboratory.LabTestID** as a primary key and **Hospitalization.LabTestID** as a foreign key
 
-<li>Database Queries</li><br>
 
-<ol type="a">
-  <li>DDL (Data Definition Language)</li>
+<h2>Database Queries</h2>
 
-  The following instructions were written in the scope of CREATING the structure of the database (CREATE INSTRUCTIONS)
+  <h3>DDL (Data Definition Language)</h3>
+
+  The following instructions were written in the scope of CREATING the structure of the database (CREATE INSTRUCTIONS):
+  ```
 CREATE DATABASE HospitalDepartment;
 CREATE TABLE RespDepartment (
 DepID int NOT NULL AUTO_INCREMENT,
@@ -43,7 +43,9 @@ PacFileID int NOT NULL,
 EmpID int NOT NULL,
 PRIMARY KEY (DepID)
 );
+```
 
+```
 CREATE TABLE Employees (
 EmpID int NOT NULL,
 EmpLastName varchar (150) NOT NULL,
@@ -53,6 +55,7 @@ Speciality varchar (50) NOT NULL,
 DepID int NOT NULL,
 Salary float NULL
 );
+```
 
 CREATE TABLE Hospitalization(
 PacFileID varchar (10) NOT NULL,
@@ -135,13 +138,14 @@ PRIMARY KEY (OutPatientID)
 );
  
   
-  <li>DML (Data Manipulation Language)</li>
+  <h3>DML (Data Manipulation Language)</h3>
 
   In order to be able to use the database I populated the tables with various data necessary in order to perform queries and manipulate the data. 
   In the testing process, this necessary data is identified in the Test Design phase and created in the Test Implementation phase. 
 
   Below you can find all the insert instructions that were created in the scope of this project:
 
+```
 INSERT INTO RespDepartment VALUES (1, 'RESPIRATORY', 'RESP138', 21);
 INSERT INTO RespDepartment VALUES (2, 'RESPIRATORY', 'RESP139', 22);
 INSERT INTO RespDepartment VALUES (3, 'RESPIRATORY', 'RESP140', 23);
@@ -152,6 +156,7 @@ INSERT INTO RespDepartment VALUES (7, 'RESPIRATORY', 'RESP144', 27);
 INSERT INTO RespDepartment VALUES (8, 'RESPIRATORY', 'RESP145', 28);
 INSERT INTO RespDepartment VALUES (9, 'RESPIRATORY', 'RESP146', 29);
 INSERT INTO RespDepartment VALUES (10, 'RESPIRATORY', 'RESP147', 30);
+```
 
 INSERT INTO Employees VALUES (21, 'Popescu', 'Adrian', '1700218120754', 'doctor', 1, 20000);         
 INSERT INTO Employees VALUES (22, 'Tomescu', 'Vasile', '1780615125740','doctor', 2, 1800);     
@@ -232,7 +237,7 @@ INSERT INTO OutPatients (OutPatientID, PacHospID, PacLastName, PacFirstName, CNP
 UPDATE Laboratory SET TestResults ='negative' WHERE LabTestID='Lab304';
 UPDATE Laboratory SET TestResults ='positive' WHERE LabTestID='Lab304';
 
-  <li>DQL (Data Query Language)</li>
+  <h3>DQL (Data Query Language)</h3>
 
 After the testing process, I deleted the data that was no longer relevant in order to preserve the database clean: 
 
@@ -297,10 +302,10 @@ HAVING SUM(Salary)>4000;
 
 
 
-</ol>
 
-<li>Conclusions</li>
 
-An useful database for the respiratory department in a hospital has been created. The admin user gave the access to all staff needed. All the records should be updated daily for the patients' files, treatment, blood tests and other investigations, medication.
+<h2>Conclusions</h2>
 
-</ol>
+A useful database for the respiratory department in a hospital has been created. The admin user gave the access to all staff needed. All the records should be updated daily for the patients' files, treatment, blood tests and other investigations, medication.
+
+
