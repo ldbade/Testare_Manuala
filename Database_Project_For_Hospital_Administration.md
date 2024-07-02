@@ -120,14 +120,14 @@ TestResults varchar(255) NULL
 );
 ```
   After the database and the tables have been created, a few ALTER instructions were written in order to update the structure of the database, as described below:
-ALTER TABLE RespDepartment MODIFY COLUMN PacFileID varchar (10) NOT NULL;
-ALTER TABLE Employees ADD PRIMARY KEY (EmpID);
-ALTER TABLE RespDepartment ADD CONSTRAINT
+- **ALTER TABLE** RespDepartment MODIFY COLUMN PacFileID varchar (10) NOT NULL;
+- **ALTER TABLE** Employees ADD PRIMARY KEY (EmpID);
+- **ALTER TABLE** RespDepartment ADD CONSTRAINT
 FOREIGN KEY (EmpID) REFERENCES Employees(EmpID);
-ALTER TABLE Treatment CHANGE PacHospID PacFileID varchar (10) NOT NULL;
-ALTER TABLE Treatment CHANGE MedcineDose MedicineDose varchar (20) NOT NULL;
-ALTER TABLE InPatients RENAME OutPatients;
-ALTER TABLE OutPatients RENAME COLUMN InPatientID TO OutPatientID;
+- **ALTER TABLE** Treatment CHANGE PacHospID PacFileID varchar (10) NOT NULL;
+- **ALTER TABLE** Treatment CHANGE MedcineDose MedicineDose varchar (20) NOT NULL;
+- **ALTER TABLE** InPatients RENAME OutPatients;
+- **ALTER TABLE** OutPatients RENAME COLUMN InPatientID TO OutPatientID;
 
 ```
 CREATE TABLE InPatients (
@@ -244,19 +244,19 @@ INSERT INTO OutPatients (OutPatientID, PacHospID, PacLastName, PacFirstName, CNP
   After the insert, in order to prepare the data to be better suited for the testing process, I updated some data in the following way:
 
  
-UPDATE Laboratory SET TestResults ='negative' WHERE LabTestID='Lab304';
-UPDATE Laboratory SET TestResults ='positive' WHERE LabTestID='Lab304';
+- **UPDATE** Laboratory SET TestResults ='negative' WHERE LabTestID='Lab304';
+- **UPDATE** Laboratory SET TestResults ='positive' WHERE LabTestID='Lab304';
 
   <h3>DQL (Data Query Language)</h3>
 
 After the testing process, I deleted the data that was no longer relevant in order to preserve the database clean: 
 
 
-DELETE FROM OutPatients WHERE City='Cluj-Napoca';
+- **DELETE** FROM OutPatients WHERE City='Cluj-Napoca';
 In order to simulate various scenarios that might happen in real life I created the following queries that would cover multiple potential real-life situations:
 <br>
 
-SELECT * FROM InPatients;
+- SELECT * FROM InPatients;
 SELECT * FROM PatientFile;
 SELECT * FROM Treatment;
 SELECT PatientData.PacFileID, PatientData.PacLastName, PatientData.PacFirstName,
@@ -265,46 +265,46 @@ FROM PatientData
 INNER JOIN Hospitalization ON PatientData.PacFileID=Hospitalization.PacFileID
 INNER JOIN Treatment ON PatientData.PacFileID=Treatment.PacFileID;
 
-SELECT * FROM PatientData
+- SELECT * FROM PatientData
 CROSS JOIN Laboratory ON PatientData.PacFileID=Laboratory.PacFileID;
 
-SELECT Hospitalization.PacFileID, Treatment.TreatID FROM Hospitalization LEFT JOIN Treatment ON Hospitalization.TreatID=Treatment.TreatID;
+- SELECT Hospitalization.PacFileID, Treatment.TreatID FROM Hospitalization LEFT JOIN Treatment ON Hospitalization.TreatID=Treatment.TreatID;
 --The statement returns all records from Hospitalization and the matches records from Treatment;
 
 
-SELECT EmpCNP  AS CNP FROM Employees 
+- SELECT EmpCNP  AS CNP FROM Employees 
 UNION ALL
 SELECT CNP FROM PatientData
 ORDER BY CNP;
 
-SELECT * FROM Employees;
+- SELECT * FROM Employees;
 SELECT EmpLastName, EmpFirstName FROM Employees WHERE EXISTS (
 SELECT Salary FROM Employees WHERE EmpLastName>'Sabau');
 
-SELECT * FROM PatientData;
+- SELECT * FROM PatientData;
 SELECT COUNT (PacFileID), City FROM PatientData GROUP BY City ORDER BY COUNT (PacFileID) ASC; 
 
 
-SELECT * FROM PatientData;
+- SELECT * FROM PatientData;
 SELECT COUNT(PacFileID) FROM PatientData;
 
 
-SELECT * FROM Employees;
+- SELECT * FROM Employees;
 SELECT MAX(EmpID) AS Maxim FROM Employees;
 
-SELECT AVG(Salary) AS Media FROM Employees;
+- SELECT AVG(Salary) AS Media FROM Employees;
 SELECT * FROM Employees;
 
 
-SELECT CONCAT(City, Address) AS FullAddress FROM PatientData;
+- SELECT CONCAT(City, Address) AS FullAddress FROM PatientData;
 SELECT CONCAT_WS('*', PacLastName, PacFirstName) AS FullName FROM PatientData;
 
-SELECT LEFT ('Tomescu', 4) AS String;
-SELECT Dateofadmission, Diagnostic FROM Hospitalization WHERE Dateofadmission='2022-09-17' AND Diagnostic='Bronsita acuta';
-SELECT Dateofadmission, Diagnostic FROM Hospitalization WHERE Dateofadmission='2022-09-17' OR Diagnostic='Pneumonie bazala';
+- SELECT LEFT ('Tomescu', 4) AS String;
+- SELECT Dateofadmission, Diagnostic FROM Hospitalization WHERE Dateofadmission='2022-09-17' AND Diagnostic='Bronsita acuta';
+- SELECT Dateofadmission, Diagnostic FROM Hospitalization WHERE Dateofadmission='2022-09-17' OR Diagnostic='Pneumonie bazala';
 SELECT * FROM PatientData WHERE City LIKE 'Nap%';
 
-SELECT EmpCNP SUM(Salary)
+- SELECT EmpCNP SUM(Salary)
 FROM Employees
 GROUP BY EmpCNP
 HAVING SUM(Salary)>4000;
