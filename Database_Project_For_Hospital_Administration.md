@@ -216,6 +216,7 @@ INSERT INTO Laboratory VALUES ('LAB308', 'RESP145', 'ASLO', '2022-09-18', NULL);
 INSERT INTO Laboratory VALUES ('LAB309', 'RESP146', 'Radiografie pulmonara', '2022-09-18', NULL);
 INSERT INTO Laboratory VALUES ('LAB310', 'RESP147', 'Radiografie pulmonara', '2022-09-19', NULL);
 ```
+
 ```
 INSERT INTO Farmacy VALUES ('RPR255', 'RESP138', 'Augmentin', 'Ser fiziologic', 'Paracetamol', NULL, NULL, NULL, 'TR1');
 INSERT INTO Farmacy VALUES ('RPR256', 'RESP139', 'Claritromicina', 'Ser fiziologic', 'Paracetamol', NULL, NULL, NULL, 'TR2');
@@ -251,19 +252,20 @@ INSERT INTO OutPatients (OutPatientID, PacHospID, PacLastName, PacFirstName, CNP
 
 After the testing process, I deleted the data that was no longer relevant in order to preserve the database clean: 
 
-
 - **DELETE** FROM OutPatients WHERE City='Cluj-Napoca';
 In order to simulate various scenarios that might happen in real life I created the following queries that would cover multiple potential real-life situations:
 <br>
 
-- SELECT * FROM InPatients;
-SELECT * FROM PatientFile;
+```
+SELECT * FROM Hospitalization;
+SELECT * FROM PatientData;
 SELECT * FROM Treatment;
 SELECT PatientData.PacFileID, PatientData.PacLastName, PatientData.PacFirstName,
 Hospitalization.Diagnostic, Treatment.MedName, Treatment.MedicineDose 
 FROM PatientData
 INNER JOIN Hospitalization ON PatientData.PacFileID=Hospitalization.PacFileID
 INNER JOIN Treatment ON PatientData.PacFileID=Treatment.PacFileID;
+```
 
 - SELECT * FROM PatientData
 CROSS JOIN Laboratory ON PatientData.PacFileID=Laboratory.PacFileID;
@@ -308,7 +310,6 @@ SELECT * FROM PatientData WHERE City LIKE 'Nap%';
 FROM Employees
 GROUP BY EmpCNP
 HAVING SUM(Salary)>4000;
-
 
 
 
